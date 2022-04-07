@@ -2,11 +2,14 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import {useContext} from "react";
+import UserContext from "./Usecontext";
 
 export default function TelaLogin() {
-    const [email, setEmail] = React.useState("");
-    const [senha, setSenha] = React.useState("");
+    const [email, setEmail] = React.useState("douglastec2@gmail.com");
+    const [senha, setSenha] = React.useState("12345678");
     const navigate = useNavigate();
+    const { setToken } = useContext(UserContext);
 
     function login() {
         const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/auth/login";
@@ -18,7 +21,8 @@ export default function TelaLogin() {
         promise.then(response => {
             const { data } = response;
             console.log(data);
-            navigate("/hoje");
+            setToken(data.token)
+            navigate("/subscriptions");
         })
         promise.catch(err => {
             alert("Insira dados válidos")
