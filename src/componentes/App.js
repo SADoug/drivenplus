@@ -5,17 +5,21 @@ import UserContext from "./Usecontext";
 import { useState } from "react";
 import TelaCadastro from "./TelaCadastro";
 import TelaPlanoUnico from "./TelaPlanoUnico";
+import TelaHome from "./TelaHome";
 
 function App() {
     const [token, setToken] = useState("");
+    const [ dados, setDados] = useState("");
     return (
-        <UserContext.Provider value={{ token, setToken }}>
+        <UserContext.Provider value={{ token, setToken, dados, setDados }}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<TelaLogin />} />
                     <Route path="/sign-up" element={<TelaCadastro />} />
                     <Route path="/subscriptions" element={<TelaPlanos />} />
-                    <Route path="/subscriptions/ID_DO_PLANO" element={<TelaPlanoUnico />} />
+                    <Route path="/subscriptions/:ID_DO_PLANO" element={<TelaPlanoUnico />} />
+                    <Route path="/home" element={<TelaHome />} />
+
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

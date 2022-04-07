@@ -9,8 +9,8 @@ export default function TelaLogin() {
     const [email, setEmail] = React.useState("douglastec2@gmail.com");
     const [senha, setSenha] = React.useState("12345678");
     const navigate = useNavigate();
-    const { setToken } = useContext(UserContext);
-
+    const { setToken, setDados } = useContext(UserContext);
+   
     function login() {
         const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/auth/login";
         
@@ -22,7 +22,9 @@ export default function TelaLogin() {
             const { data } = response;
             console.log(data);
             setToken(data.token)
-            navigate("/subscriptions");
+            setDados(data)
+            {data.membership === null ? navigate("/subscriptions") : navigate("/home");}
+            
         })
         promise.catch(err => {
             alert("Insira dados válidos")
@@ -32,6 +34,7 @@ export default function TelaLogin() {
 
 
     return (<Container>
+        <img src="https://svgshare.com/i/dSP.svg" />
         <input typeof="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input typeof="text" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
 
@@ -49,7 +52,9 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
 
-  
+  img {
+      margin-bottom: 100px;
+  }
 input {
     width: 303px;
 height: 45px;
