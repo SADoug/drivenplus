@@ -9,7 +9,7 @@ export default function TelaLogin() {
     const [email, setEmail] = React.useState("douglastec2@gmail.com");
     const [senha, setSenha] = React.useState("12345678");
     const navigate = useNavigate();
-    const { setToken, setDados } = useContext(UserContext);
+    const { setToken, setDados,  setLogo, setName } = useContext(UserContext);
    
     function login() {
         const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/auth/login";
@@ -22,7 +22,9 @@ export default function TelaLogin() {
             const { data } = response;
             console.log(data);
             setToken(data.token)
-            setDados(data)
+            setDados(data.membership.perks)
+            setLogo(data.membership.image)
+            setName(data.name)
             {data.membership === null ? navigate("/subscriptions") : navigate("/home");}
             
         })

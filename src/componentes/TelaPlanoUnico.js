@@ -5,7 +5,11 @@ import UserContext from "./Usecontext";
 import axios from "axios";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Vector1 from "./../assets/Vector1.png"
+import BeneficiosLogo from "./../assets/BeneficiosLogo.png"
+import PrecoLogo from "./../assets/PrecoLogo.png"
 
+/*import Modal from "react-modal"
+Modal.setAppElement('#root')*/
 
 export default function TelaPlanoUnico() {
     const { ID_DO_PLANO } = useParams();
@@ -33,7 +37,6 @@ export default function TelaPlanoUnico() {
             console.log(result.data.perks)
             setPlano(result.data)
             setPlanoPerk(result.data.perks)
-
         })
         promise.catch((err) => {
             console.log(err)
@@ -43,7 +46,7 @@ export default function TelaPlanoUnico() {
     function Assinar() {
         const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
         const promise = axios.post(URL, {
-            membershipId: 1,
+            membershipId: 1, /*ARRUMAR COMO PEGAR ESSE VALOR DE FORMA AUTOMATICA*/
             cardName: nome,
             cardNumber: digitos,
             securityNumber: codigo,
@@ -58,8 +61,16 @@ export default function TelaPlanoUnico() {
             alert("Insira dados válidos")
         });
     }
-
-
+    /*const [modalaberto, setModalaberto] = useState(true);
+    function modalOPen(){return (setModalaberto(false))}
+    function modalClosed(){return (setModalaberto(true))}
+   
+    function Modal() {
+        return (<>
+            { modalaberto === true ? modalOPen() : modalClosed()}
+            </>
+        )
+    }*/
 
     return (<Container>
         <Header>
@@ -70,7 +81,8 @@ export default function TelaPlanoUnico() {
             <h1>Driven plus</h1>
         </Titulo>
         <Div1>
-            <h1>Benefícios:</h1>
+            <h2>
+                <img src={BeneficiosLogo}/> Benefícios:</h2>
 
             {planoperk.map((planoele) => {
                 return (
@@ -81,22 +93,31 @@ export default function TelaPlanoUnico() {
             })}
         </Div1>
         <Div1>
-            <h1>Preço: {plano.price}</h1>
+            <h2><img src={PrecoLogo}/> Preço:</h2>
+            <h2>R$ {plano.price} cobrados mensalmente</h2>
+
         </Div1>
         <DivInput>
-            <input typeof="text" placeholder="Nome impresso no cartão Ex: Fulano Da Silva " value={nome} onChange={(e) => setNome(e.target.value)} />
-            <input typeof="text" placeholder="Digitos no cartão" value={digitos} onChange={(e) => setDigitos(e.target.value)} />
+            <input className="input1" typeof="text" placeholder="Nome impresso no cartão Ex: Fulano Da Silva " value={nome} onChange={(e) => setNome(e.target.value)} />
+            <input className="input1" typeof="text" placeholder="Digitos no cartão" value={digitos} onChange={(e) => setDigitos(e.target.value)} />
             <Div2>
-            <input typeof="text" placeholder="Código de segurança" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
-            <input typeof="text" placeholder="Validade" value={validade} onChange={(e) => setValidade(e.target.value)} />
+            <input className="input2" typeof="text" placeholder="Código de segurança" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
+            <input className="input2" typeof="text" placeholder="Validade" value={validade} onChange={(e) => setValidade(e.target.value)} />
             </Div2>
             <Button onClick={Assinar} >Assinar</Button>
+           
         </DivInput>
     </Container>
-
     )
-
 }
+
+const Container3 = styled.div`
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        `;
 const Header = styled.div`
 height: 60px;
 width: 100vw;
@@ -113,7 +134,7 @@ display: flex;
 flex-direction: column;
 
 
-input {
+.input1 {
     width: 299px;
 height: 52px;
 background: #FFFFFF;
@@ -163,16 +184,17 @@ img {
 const Div1 = styled.div`
 display: flex;
 flex-direction: column;
-align-items:center ;
+margin-left: 30px;
+margin-bottom: 10px;
 
-h1 {
+h2 {
     font-family: 'Roboto';
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
 line-height: 19px;
-
 color: #FFFFFF;
+margin-bottom: 5px;
 }
 p {
 
@@ -188,6 +210,20 @@ color: #FFFFFF;
 `;
 const Div2 = styled.div`
 display: flex;
+justify-content: space-around;
+
+.input2 {
+    width: 120px;
+height: 52px;
+background: #FFFFFF;
+border: 1px solid #D5D5D5;
+box-sizing: border-box;
+border-radius: 5px;
+margin-top: 16px;
+font-family: 'Roboto';
+font-style: normal;
+color: #DBDBDB;
+}
 `;
 const H = styled.div`
 color: white;
@@ -201,6 +237,29 @@ const Container = styled.div`
   padding: 31px;
   display: flex;
   flex-direction: column;
+  
+
+h1 {
+color: white;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 38px;
+margin-bottom: 24px;
+}
+`;
+
+const Container1 = styled.div`
+ 
+  width: 400px;
+  height: 100vw;
+  padding: 31px;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  opacity: 0.5;
+  z-index: 1;
   
 
 h1 {

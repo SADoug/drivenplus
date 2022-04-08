@@ -7,11 +7,16 @@ import TelaCadastro from "./TelaCadastro";
 import TelaPlanoUnico from "./TelaPlanoUnico";
 import TelaHome from "./TelaHome";
 
+
 function App() {
     const [token, setToken] = useState("");
-    const [ dados, setDados] = useState("");
+    const [dados, setDados] = useState("");
+    const [logo, setLogo] = useState("");
+    const [name, setName] = useState("");
+    
+
     return (
-        <UserContext.Provider value={{ token, setToken, dados, setDados }}>
+        <UserContext.Provider value={{ token, setToken, dados, setDados, logo, setLogo, name, setName }}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<TelaLogin />} />

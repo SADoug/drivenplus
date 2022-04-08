@@ -44,7 +44,7 @@ export default function TelaPlanos() {
 const Div = styled.div`
 
 width: 290px;
-height: 180px;
+height: 220px;
 display: flex;
 justify-content: space-around;
 align-items: center;
@@ -61,11 +61,13 @@ font-family: 'Roboto';
 
 const Container = styled.div`
  
-  width: 100vh;
+  width: 100%;
   height: 100vw;
-  padding: 31px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
+  
+  align-items: center;
 
 h1 {
 color: white;

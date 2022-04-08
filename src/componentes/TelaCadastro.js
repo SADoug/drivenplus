@@ -32,6 +32,7 @@ export default function TelaCadastro() {
     }
 
     return (<Container>
+        <img src="https://svgshare.com/i/dSP.svg" />
         <input typeof="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} />
         <input typeof="text" placeholder="CPF" value={CPF} onChange={(e) => setCPF(e.target.value)} />
         <input typeof="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -52,6 +53,9 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 
+img {
+      margin-bottom: 100px;
+  }
 
 input {
     width: 299px;

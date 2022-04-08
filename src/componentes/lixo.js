@@ -1,7 +1,9 @@
-{planoperk.map((planoele) => {
-    return (
-        <>
-<p>{planoele} </p>
-<p></p>)
-</>
-)})}
+import Modal from "react-modal"
+Modal.setAppElement('#root')
+
+<Modal
+                    isOpen={modalOPen}
+                    onRequestClose={modalClosed}
+                >
+                    <p>MODALLLLLLLLLLLLLLLLLLLLLLLLLLL</p>
+                </Modal>
